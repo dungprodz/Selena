@@ -148,13 +148,13 @@
 										</td>
 										<td>${product.categories.name }</td>
 										<td><span id="_product_status_${product.id}"> <c:choose>
-													<c:when test="${product.status}">
-														<input type="checkbox" checked="checked"
-															name="status" readonly="readonly">
-													</c:when>
-													<c:otherwise>
-														<input type="checkbox" name="status" readonly="readonly">
-													</c:otherwise>
+													<c:when test="${product.status == 1}">
+													<input type="checkbox" checked="checked" name="status"
+														readonly="readonly">
+												</c:when>
+												<c:when test="${product.status == 0}">
+													<input type="checkbox" name="status" readonly="readonly">
+												</c:when>
 												</c:choose>
 										</span></td>
 										<td><img src="${base}/upload/${product.avatar}"
@@ -163,8 +163,8 @@
 											<div>
 												<a class="btn btn-primary"
 													href="${base }/admin/product/${product.id}" role="button">Edit</a>
-												<a  class="btn btn-danger" role="button"
-													onclick="DeleteProduct('${base}', '${product.id }');">Delete</a>
+												<a class="btn btn-danger" role="button"
+													href="${base }/delete/${product.id}">Delete</a>
 											</div>
 										</td>
 									</tr>
