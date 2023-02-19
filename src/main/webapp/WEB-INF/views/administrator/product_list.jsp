@@ -207,24 +207,7 @@
 				    });
 				});
 			});			
-			function DeleteProduct(baseUrl, productId){
-				let data = {
-					status: $('#_product_status_'+ productId).is(":checked")
-				};
 			
-			jQuery.ajax({
-				url: baseUrl +"/admin/product/list",
-				type:"post",
-				contentType:"application/json",
-				data: JSON.stringify(data),
-				dataType:"json",
-				success:function(jsonResult){
-					$('input:checkbox[name=status]').prop('checked', );
-				},
-				error: function(jqXhr,textStatus,errorMessage){
-					
-				}
-			});
 		}
 	</script>
 	
