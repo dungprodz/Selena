@@ -17,7 +17,7 @@ public abstract class BaseEntity {
 	private Integer id;
 
 	@Column(name = "status", nullable = true)
-	private Boolean status = Boolean.TRUE;
+	private int status;
 
 	@Column(name = "created_by", nullable = true)
 	private Integer createdBy;
@@ -39,11 +39,11 @@ public abstract class BaseEntity {
 		this.id = id;
 	}
 
-	public Boolean getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
