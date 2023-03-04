@@ -105,7 +105,10 @@ public class AdminProductController extends BaseController {
 		
 	}
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 1a5340fb8b4edba6ab0fed85a127af10e9d891a8
 	@RequestMapping(value = {"/delete/{id}"} , method = RequestMethod.GET)
 	public String deleteProduct(final Model model, final HttpServletRequest request,
 			final HttpServletResponse response, @PathVariable("id") int id) throws IOException {

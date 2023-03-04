@@ -141,6 +141,7 @@
 							<c:forEach items="${products.data}" var="product"
 								varStatus="loop">
 								<tr>
+<<<<<<< HEAD
 									<th scope="row" width="5%">${loop.index + 1}</th>
 									<td>${product.title }</td>
 									<td>
@@ -151,18 +152,51 @@
 									<td>${product.categories.name }</td>
 									<td><span id="_product_status_${product.id}"> <c:choose>
 												<c:when test="${product.status == 1}">
+=======
+									<th scope="col">#</th>
+									<th scope="col">Title</th>
+									<th scope="col">Price</th>
+									<th scope="col">Category</th>
+									<th scope="col">Xóa/Chưa Xóa</th>
+									<th scope="col">Avatar</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${products.data}" var="product"
+									varStatus="loop">
+									<tr>
+										<th scope="row" width="5%">${loop.index + 1}</th>
+										<td>${product.title }</td>
+										<td>
+											<!-- định dạng tiền tệ --> <fmt:setLocale value="vi_VN"
+												scope="session" /> <fmt:formatNumber
+												value="${product.price}" type="currency" />
+										</td>
+										<td>${product.categories.name }</td>
+										<td><span id="_product_status_${product.id}"> <c:choose>
+													<c:when test="${product.status == 1}">
+>>>>>>> 1a5340fb8b4edba6ab0fed85a127af10e9d891a8
 													<input type="checkbox" checked="checked" name="status"
 														readonly="readonly">
 												</c:when>
 												<c:when test="${product.status == 0}">
 													<input type="checkbox" name="status" readonly="readonly">
 												</c:when>
+<<<<<<< HEAD
 											</c:choose>
 									</span></td>
 									<td><img src="${base}/upload/${product.avatar}"
 										width="100" height="100"></td>
 									<td width="15%">
 										<form action="${base}/delete" method="post">
+=======
+												</c:choose>
+										</span></td>
+										<td><img src="${base}/upload/${product.avatar}"
+											width="100" height="100"></td>
+										<td width="15%">
+>>>>>>> 1a5340fb8b4edba6ab0fed85a127af10e9d891a8
 											<div>
 												<a class="btn btn-primary"
 													href="${base }/admin/product/${product.id}" role="button">Edit</a>
@@ -210,7 +244,12 @@
 				    });
 				});
 			});			
+<<<<<<< HEAD
 		
+=======
+			
+		}
+>>>>>>> 1a5340fb8b4edba6ab0fed85a127af10e9d891a8
 	</script>
 
 
