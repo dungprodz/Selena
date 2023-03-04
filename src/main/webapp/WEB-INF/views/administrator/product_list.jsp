@@ -82,7 +82,8 @@
 									class="align-middle me-1" data-feather="help-circle"></i> Help
 									Center</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="${base}/logout">Log out (${userLogined.email})</a>
+								<a class="dropdown-item" href="${base}/logout">Log out
+									(${userLogined.email})</a>
 							</div></li>
 					</ul>
 				</div>
@@ -123,62 +124,65 @@
 									href="${base }/admin/product/" role="button"> Add New </a>
 							</div>
 						</div>
-						<table class="table table-striped">
-							<thead>
+					</form>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">STT</th>
+								<th scope="col">Title</th>
+								<th scope="col">Price</th>
+								<th scope="col">Category</th>
+								<th scope="col">Xóa/Chưa Xóa</th>
+								<th scope="col">Avatar</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${products.data}" var="product"
+								varStatus="loop">
 								<tr>
-									<th scope="col">#</th>
-									<th scope="col">Title</th>
-									<th scope="col">Price</th>
-									<th scope="col">Category</th>
-									<th scope="col">Xóa/Chưa Xóa</th>
-									<th scope="col">Avatar</th>
-									<th scope="col">Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${products.data}" var="product"
-									varStatus="loop">
-									<tr>
-										<th scope="row" width="5%">${loop.index + 1}</th>
-										<td>${product.title }</td>
-										<td>
-											<!-- định dạng tiền tệ --> <fmt:setLocale value="vi_VN"
-												scope="session" /> <fmt:formatNumber
-												value="${product.price}" type="currency" />
-										</td>
-										<td>${product.categories.name }</td>
-										<td><span id="_product_status_${product.id}"> <c:choose>
-													<c:when test="${product.status}">
-														<input type="checkbox" checked="checked"
-															name="status" readonly="readonly">
-													</c:when>
-													<c:otherwise>
-														<input type="checkbox" name="status" readonly="readonly">
-													</c:otherwise>
-												</c:choose>
-										</span></td>
-										<td><img src="${base}/upload/${product.avatar}"
-											width="100" height="100"></td>
-										<td width="15%">
+									<th scope="row" width="5%">${loop.index + 1}</th>
+									<td>${product.title }</td>
+									<td>
+										<!-- định dạng tiền tệ --> <fmt:setLocale value="vi_VN"
+											scope="session" /> <fmt:formatNumber
+											value="${product.price}" type="currency" />
+									</td>
+									<td>${product.categories.name }</td>
+									<td><span id="_product_status_${product.id}"> <c:choose>
+												<c:when test="${product.status == 1}">
+													<input type="checkbox" checked="checked" name="status"
+														readonly="readonly">
+												</c:when>
+												<c:when test="${product.status == 0}">
+													<input type="checkbox" name="status" readonly="readonly">
+												</c:when>
+											</c:choose>
+									</span></td>
+									<td><img src="${base}/upload/${product.avatar}"
+										width="100" height="100"></td>
+									<td width="15%">
+										<form action="${base}/delete" method="post">
 											<div>
 												<a class="btn btn-primary"
 													href="${base }/admin/product/${product.id}" role="button">Edit</a>
-												<a  class="btn btn-danger" role="button"
-													onclick="DeleteProduct('${base}', '${product.id }');">Delete</a>
+												<a class="btn btn-danger" role="button"
+													href="${base }/delete/${product.id}">Delete</a>
 											</div>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+										</form>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
 
-						<div class="row">
-							<div class="col-12 d-flex justify-content-center">
-								<div id="paging"></div>
-							</div>
+					<div class="row">
+						<div class="col-12 d-flex justify-content-center">
+							<div id="paging"></div>
 						</div>
+					</div>
 
-					</form>
+
 				</div>
 			</main>
 		</div>
@@ -190,7 +194,6 @@
 
 	<script type="text/javascript">
 			$( document ).ready(function() {
-				
 				
 				$("#categoryId").val(${productSearch.categoryId});
 				
@@ -207,30 +210,12 @@
 				    });
 				});
 			});			
-			function DeleteProduct(baseUrl, productId){
-				let data = {
-					status: $('#_product_status_'+ productId).is(":checked")
-				};
-			
-			jQuery.ajax({
-				url: baseUrl +"/admin/product/list",
-				type:"post",
-				contentType:"application/json",
-				data: JSON.stringify(data),
-				dataType:"json",
-				success:function(jsonResult){
-					$('input:checkbox[name=status]').prop('checked', );
-				},
-				error: function(jqXhr,textStatus,errorMessage){
-					
-				}
-			});
-		}
+		
 	</script>
-	
 
-	
-	
+
+
+
 </body>
 
 </html>

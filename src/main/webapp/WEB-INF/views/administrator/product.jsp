@@ -76,6 +76,10 @@
 							<i class="align-middle" data-feather="map"></i> <span
 							class="align-middle">Maps</span>
 					</a></li>
+					<li class="sidebar-item "><a class="sidebar-link"
+						href="${base}/admin/order"> <i class="align-middle" data-feather="map"></i> <span
+							class="align-middle">Order</span>
+					</a></li>
 				</ul>
 			</div>
 		</nav>

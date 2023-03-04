@@ -1,7 +1,10 @@
 package com.selena.controller.customer;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -68,11 +71,12 @@ public class CartController extends BaseController {
 		saleOrder.setCustomerAddress(customerAddress);
 		saleOrder.setCustomerPhone(customerPhone);
 		saleOrder.setCode(String.valueOf(System.currentTimeMillis())); // mã hóa đơn
-
+		
 		// lấy giỏ hàng
 		HttpSession session = request.getSession();
 		Cart cart = (Cart) session.getAttribute("cart");
-
+		int total= (int) session.getAttribute("totalPrice");
+		saleOrder.setTotal(BigDecimal.valueOf(total));
 		// lấy sản phẩm trong giỏ hàng
 		for (CartItem cartItem : cart.getCartItems()) {
 			SaleOrderProducts saleOrderProducts = new SaleOrderProducts();
@@ -156,9 +160,35 @@ public class CartController extends BaseController {
 		jsonResult.put("status", "TC");
 		jsonResult.put("totalItems", getTotalItems(request));
 
-		// lưu totalItems vào session
-		// tất cả các giá trị lưu trên session đều có thể truy cập được từ View
-//		session.setAttribute("totalItems", getTotalItems(request));
+
+		return ResponseEntity.ok(jsonResult);
+	}
+
+	@RequestMapping(value = { "/ajax/DeleteCart" }, method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> ajax_DeleteCart(final Model model, final HttpServletRequest request,
+			final HttpServletResponse response, final @RequestBody CartItem cartItem) {
+
+		HttpSession session = request.getSession();
+
+		Cart cart = (Cart) session.getAttribute("cart");
+		List<CartItem> cartItems = cart.getCartItems();
+	
+		Iterator<CartItem> iterator = cartItems.iterator();
+	    while (iterator.hasNext()) {
+	    	CartItem item = iterator.next();
+	        if (item.getProductId() == cartItem.getProductId()) {
+	            iterator.remove();
+	            break;
+	        }
+	    }
+		
+		session.setAttribute("cart", cart);
+
+		// trả về kết quả
+		Map<String, Object> jsonResult = new HashMap<String, Object>();
+		jsonResult.put("code", 200);
+		jsonResult.put("status", "TC");
+		jsonResult.put("totalItems", getTotalItems(request));
 
 		return ResponseEntity.ok(jsonResult);
 	}

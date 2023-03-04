@@ -1,12 +1,16 @@
 package com.selena.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.selena.model.User;
+import com.selena.repository.UserRepository;
 
 
 @Service
 public class UserService extends BaseService<User> {
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Override
 	protected Class<User> clazz() {
@@ -14,8 +18,8 @@ public class UserService extends BaseService<User> {
 	}
 
 	public User loadUserByUsername(String userName) {
-		String sql = "select * from tbl_users u where u.username = '" + userName + "' and status = 1";
-		return this.getEntityByNativeSQL(sql);
+		return userRepository.getUserByUsername(userName);
 	}
+	
 	
 }

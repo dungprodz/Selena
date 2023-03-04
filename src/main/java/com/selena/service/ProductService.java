@@ -112,8 +112,7 @@ public class ProductService extends BaseService<Product> {
 			}
 		}
 
-		// tạo seo: bổ sung thêm thời gian tính bằng miliseconds để tránh trùng seo
-//				p.setSeo(new Slugify().slugify(p.getTitle() + "-" + System.currentTimeMillis()));
+		
 
 		// lưu vào database
 		return super.saveOrUpdate(product);
@@ -164,13 +163,11 @@ public class ProductService extends BaseService<Product> {
 				ProductImages pi = new ProductImages();
 				pi.setPath("product/pictures/" + fileName);
 				pi.setTitle(fileName);
-				
 				p.addProductImages(pi);
 			}
 		}
 
-		//tạo seo
-//		p.setSeo(new Slugify().slugify(p.getTitle() + "-" + System.currentTimeMillis()));
+		
 		
 		// lưu vào database
 		return super.saveOrUpdate(p);
@@ -199,12 +196,9 @@ public class ProductService extends BaseService<Product> {
 	}
 
 
-
-
 	public List<Product> searchProductByName(String name) {
 		return productRepository.searchProduct(name);
 	}
-
 
 
 	@Transactional

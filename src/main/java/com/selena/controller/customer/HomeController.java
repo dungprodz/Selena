@@ -45,4 +45,16 @@ public class HomeController {
 		
 		return "customer/home";
 	}
+	
+	@RequestMapping(value={"/home"}, method = RequestMethod.POST)
+	public String searchProduct(final Model model,
+			final HttpServletRequest request,
+			final HttpServletResponse response
+			) throws IOException {
+		
+		String keyword = request.getParameter("name");
+		List<Product> products=productService.searchProductByName(keyword);
+		model.addAttribute("product", products);
+		return "customer/home";
+	}
 }

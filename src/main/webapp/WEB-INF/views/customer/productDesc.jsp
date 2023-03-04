@@ -44,7 +44,7 @@
 			<div class="main-left">
 				<div id="carouselExampleIndicators" class="carousel slide"
 					data-interval="4000" data-ride="carousel">
-					
+
 					<div class="carousel-inner">
 						<div class="carousel-item active">
 							<img class="d-block w-100" src="${base}/upload/${productAvatar}"
@@ -57,31 +57,34 @@
 						<p>Mô tả</p>
 						<i class="fa-solid fa-plus btn-more"></i>
 					</div>
-					<p class="desc">
-						${productDesc}
-					</p>
+					<p class="desc">${productDesc}</p>
 					<div class="des-header">
 						<p>Chính sách đổi trả</p>
 						<i class="fa-solid fa-plus btn-more-order"></i>
 					</div>
-					<p class="order">
-						
-					</p>
+					<p class="order"></p>
 				</div>
 			</div>
 			<div class="main-right">
 				<div class="desc-product">
-					
-						<h2 class="desc-product-name">${productTitle}</h2>
-							<fmt:setLocale value="vi_VN"/>
-						<p class="desc-product-price"><fmt:formatNumber value="${productPrice}" type="currency"></fmt:formatNumber></p>
-						<div class="quanlity">
-							<i class="fa-solid fa-plus"></i> <span>1</span> <i
-								class="fa-solid fa-minus"></i>
-							<a class="btn-add"onclick="AddProductToCart('${base}', ${productId}, 1)"> Add
+
+					<h2 class="desc-product-name">${productTitle}</h2>
+					<fmt:setLocale value="vi_VN" />
+					<p class="desc-product-price">
+						<fmt:formatNumber value="${productPrice}" type="currency"></fmt:formatNumber>
+					</p>
+					<div class="quanlity">
+						<button type="button" data-type="tru" class="btn-tru"
+							style="border: none; padding: 5px 10px;">-</button>
+						<input type="text" value="1" class="input_slg"
+							style="border: solid 1px #ccc; text-align: center; padding: 4px 0px;">
+						<button type="button" data-type="cong" class="btn-cong"
+							style="border: none; padding: 5px 10px;">+</button>
+						<a class="btn-add"
+							onclick="AddProductToCart('${base}', ${productId})"> Add
 							to cart </a>
-						</div>
-			
+					</div>
+
 				</div>
 
 			</div>
@@ -97,8 +100,8 @@
 					<!--start-->
 					<c:forEach items="${products}" var="products">
 						<div class="product-item">
-							<a href="${base}/product/${products.id}"><img src="${base}/upload/${products.avatar}"
-								alt=""></a>
+							<a href="${base}/product/${products.id}"><img
+								src="${base}/upload/${products.avatar}" alt=""></a>
 							<p>${products.title}</p>
 							<p class="price">${products.price}VND</p>
 						</div>
@@ -124,9 +127,55 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+			<script src="${base}/js/jquery-3.6.1.min.js"></script>
 	<script src="${base}/js/descProduct.js"></script>
-	<jsp:include page="/WEB-INF/views/customer/layout/js.jsp"></jsp:include>
 
+
+	<script type="text/javascript">
+	$('.btn-cong, .btn-tru').on('click', function() {
+		let type = $(this).attr('data-type');
+		let parent = $(this).parent();
+		let input_slg = parent.find('.input_slg');
+		let slg = input_slg.val();
+		if (type == "cong") {
+			slg = parseInt(slg) +1;
+		} else {
+			if (slg > 1) {
+				slg = parseInt(slg) - 1;
+			}
+		}
+
+		input_slg.val(slg);
+	});
+	
+	function AddProductToCart(baseUrl, productId) {
+		
+		let data = {
+			productId: productId, 	// Id sản phẩm
+			quanlity: $(".input_slg").val(), 	
+		};
+
+		// $ === jQuery
+		// json == javascript object
+		jQuery.ajax({
+			url: baseUrl + "/ajax/addToCart", //->action
+			type: "post",
+			contentType: "application/json",
+			data: JSON.stringify(data),
+
+			dataType: "json", // kieu du lieu tra ve tu controller la json
+			success: function(jsonResult) {
+				
+				// tăng số lượng sản phẩm trong giỏ hàng trong icon			
+				$("#iconShowTotalItemsInCart").html(jsonResult.totalItems);
+				
+			},
+			error: function(jqXhr, textStatus, errorMessage) {
+				
+			}
+		});
+	}
+	</script>
 </body>
 
 </html>

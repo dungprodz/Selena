@@ -20,9 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbl_products")
 public class Product extends BaseEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	
 
 	@Column(name = "title", length = 1000, nullable = false)
 	private String title;
@@ -41,10 +39,7 @@ public class Product extends BaseEntity {
 	private String details;
 
 	@Column(name = "avatar", nullable = true)
-	private String avatar;
-	
-	@Column(name="status",nullable = true)
-	private Boolean status=Boolean.TRUE;
+	private String avatar;	
 	
 	@Column(name = "seo", length = 1000, nullable = true)
 	private String seo;
@@ -70,13 +65,7 @@ public class Product extends BaseEntity {
 	}
 	
 	
-	public Integer getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getTitle() {
 		return title;

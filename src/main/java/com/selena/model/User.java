@@ -40,7 +40,10 @@ public class User extends BaseEntity implements UserDetails {
 	@JoinTable(name = "tbl_users_roles", 
 			   joinColumns = @JoinColumn(name = "user_id"), 
 			   inverseJoinColumns = @JoinColumn(name = "role_id"))
+	
 	private Set<Role> roles = new HashSet<Role>();
+	
+	
 	public void addRoles(Role role) {
 		role.getUsers().add(this);
 		roles.add(role);
@@ -63,6 +66,7 @@ public class User extends BaseEntity implements UserDetails {
 		saleOrder.setUser(null);
 	}
 	
+	@Override
 	public String getUsername() {
 		return username;
 	}
@@ -70,7 +74,8 @@ public class User extends BaseEntity implements UserDetails {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	
+	@Override
 	public String getPassword() {
 		return password;
 	}

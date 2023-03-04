@@ -61,7 +61,7 @@
 								<button type="button" data-type="cong" class="btn-cong" style="border: none;">+</button>
 							</div>
 							<div class="total"></div>
-							<button class="btn-xoa" type="button">Xóa</button>
+							<button class="btn-xoa" type="button" onclick="DeleteProductFromCart('${base}', ${ci.productId})">Xóa</button>
 						</div>
 					</div>
 				</c:forEach>
@@ -109,7 +109,37 @@
 
 	<jsp:include page="/WEB-INF/views/customer/layout/js.jsp"></jsp:include>
 
+	<script type="text/javascript">
+	function DeleteProductFromCart(baseUrl, productId) {
+		
+		let data = {
+			productId: productId, 	// Id sản phẩm
+		
+		};
 
+	
+		jQuery.ajax({
+			url: baseUrl + "/ajax/DeleteCart", //->action
+			type: "post",
+			contentType: "application/json",
+			data: JSON.stringify(data),
+
+			dataType: "json", // kieu du lieu tra ve tu controller la json
+			success: function(jsonResult) {
+				
+				$('.btn-xoa').on('click', function() {
+					$(this).parents('.row').remove();
+					let total = totalPrice();
+					$('#total-price').text(formatPrice(total) + 'VND')
+				})
+				
+			},
+			error: function(jqXhr, textStatus, errorMessage) {
+				
+			}
+		});
+	}
+	</script>
 
 </body>
 

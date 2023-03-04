@@ -99,11 +99,18 @@ public class AdminProductController extends BaseController {
 		productSearch.setCurrentPage(currentPage);
 		
 		PagerData<Product> products = productService.searchProduct(productSearch);;
-		
 		model.addAttribute("productSearch", productSearch);
 		model.addAttribute("products", products);
-		
 		return "administrator/product_list";
 		
+	}
+	
+	
+	@RequestMapping(value = {"/delete/{id}"} , method = RequestMethod.GET)
+	public String deleteProduct(final Model model, final HttpServletRequest request,
+			final HttpServletResponse response, @PathVariable("id") int id) throws IOException {
+		
+		productService.deleteProduct(id);
+		return "redirect:/admin/product/list";
 	}
 }

@@ -13,10 +13,10 @@ import com.selena.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>{
 	
-	@Query("SELECT p FROM Product p WHERE p.title = :name ")
+	@Query("SELECT p FROM Product p WHERE p.title LIKE CONCAT('%', :name, '%')")
 	List<Product> searchProduct( @Param("name") String name);
 	
 	@Modifying
-	@Query("UPDATE Product p SET p.status = '0' WHERE p.id = :id")
+	@Query("UPDATE Product p SET p.status = 0 WHERE p.id = :id")
 	void deleteProduct(@Param("id") int id);
 }
