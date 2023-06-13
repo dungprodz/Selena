@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Admin
+Build-Jdk: 17.0.5
+Implementation-Title: Maven Spring Webapp
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: kma.dung
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/selena
+Created-By: Maven Integration for Eclipse
+

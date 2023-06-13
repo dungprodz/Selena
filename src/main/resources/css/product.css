@@ -1,0 +1,49 @@
+html{
+    font-family: 'Times New Roman', Times, serif;
+}
+.desc{
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+.form-control{
+    display: inline-block;
+    height: 100px;
+}
+.form label{
+    font-size: 20px;
+    color: #000;
+    margin-bottom: 10px;
+}
+.form input{
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid;
+    padding: 10px 20px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.form textarea{
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+}
+.btn-confirm{
+    margin-bottom: 50px;
+}
+.btn-confirm button{
+    padding: 10px 20px;
+    border: 0;
+    background-color: #ccc;
+    color: #000;
+}
+.btn-confirm button:hover{
+    background-color: coral;
+    color: #000;
+    transition: 0.5s linear;
+}
+.form input:focus{
+    outline: 0;
+}
+.form textarea:focus{
+    outline: 0;
+}
