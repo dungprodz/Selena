@@ -9,7 +9,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="/WEB-INF/views/customer/layout/css.jsp"></jsp:include>
 <header>
-	<c:set var="loggedIn" value="${isLogin}" />
 	<div class="container header-container">
 		<div class="header-left"></div>
 		<div class="header-center">
@@ -23,7 +22,9 @@
 					<button class="btn btn-warning" type="submit">Tìm Kiếm</button>
 				</form>
 				<sec:authorize access="isAuthenticated()">
-
+					<a href="${base}/logout" style="margin-right: 20px;">
+						<button type="button" class="btn btn-warning" style="height: 40px;
+    margin-bottom: 5px;">Logout</button></a>
 				</sec:authorize>
 
 				<sec:authorize access="!isAuthenticated()">

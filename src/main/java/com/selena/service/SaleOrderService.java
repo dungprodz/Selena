@@ -32,7 +32,7 @@ public class SaleOrderService extends BaseService<SaleOrder>{
 		return orderRepository.findById(id).get();
 	}
 
-	public List<SaleOrder> searchOrder(int id) {
+	public SaleOrder searchOrder(int id) {
 		return orderRepository.searchOrder(id);
 	}
 	

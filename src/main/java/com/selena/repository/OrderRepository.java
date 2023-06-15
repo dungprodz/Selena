@@ -16,5 +16,5 @@ import com.selena.model.SaleOrder;
 public interface OrderRepository extends JpaRepository<SaleOrder, Integer>{
 
 	@Query("SELECT o FROM SaleOrder o WHERE o.id=:id")
-	List<SaleOrder> searchOrder( @Param("id") int id);
+	SaleOrder searchOrder( @Param("id") int id);
 }

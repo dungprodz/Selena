@@ -38,54 +38,7 @@
 <body>
 	<div class="wrapper">
 
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="${base}/admin/product/list"> <span
-					class="align-middle">Admin page</span>
-				</a>
-
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">Pages</li>
-
-					<li class="sidebar-item "><a class="sidebar-link"
-						href="${base}/admin/product/list"> <i class="align-middle"
-							data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-					</a></li>
-
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${base}/admin/profile"> <i class="align-middle"
-							data-feather="user"></i> <span class="align-middle">Profile</span>
-					</a></li>
-
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="${base}/logout"> <i class="align-middle"
-							data-feather="log-in"></i> <span class="align-middle">logout
-						</span>
-					</a></li>
-
-					<li class="sidebar-item "><a class="sidebar-link"
-						href="${base}/admin/product"> <i class="align-middle"
-							data-feather="inbox"></i> <span class="align-middle">
-								Product</span>
-					</a></li>
-
-					<li class="sidebar-item"><a class="sidebar-link" href="#">
-							<i class="align-middle" data-feather="bar-chart-2"></i> <span
-							class="align-middle">Charts</span>
-					</a></li>
-
-					<li class="sidebar-item"><a class="sidebar-link" href="#">
-							<i class="align-middle" data-feather="map"></i> <span
-							class="align-middle">Maps</span>
-					</a></li>
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="${base}/admin/order"> <i class="align-middle"
-							data-feather="map"></i> <span class="align-middle">Order</span>
-					</a></li>
-				</ul>
-			</div>
-		</nav>
+		<jsp:include page="/WEB-INF/views/administrator/layout/sidebar.jsp"></jsp:include>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -151,12 +104,12 @@
 								<div class="card-header">
 									<h5 class="card-title mb-0">Customer Details</h5>
 								</div>
-								<c:forEach items="${bill}" var="bill">
+
 									<div class="card-body text-center">
 										<img src="${base}/img/images.png" alt=""
 											class="img-fluid rounded-circle mb-2" width="128"
 											height="128" />
-										<h5 class="card-title mb-0">${bill.customerName}</h5>
+										<h5 class="card-title mb-0">${customerName}</h5>
 									</div>
 									<hr class="my-0" />
 									<hr class="my-0" />
@@ -164,7 +117,7 @@
 										<h5 class="h6 card-title">About</h5>
 										<ul class="list-unstyled mb-0">
 											<li class="mb-1"><span data-feather="home"
-												class="feather-sm me-1"></span> Email <a href="#">${bill.customerEmail}</a>
+												class="feather-sm me-1"></span> Email <a href="#">${customerEmail}</a>
 											</li>
 
 											<li class="mb-1"><span data-feather="briefcase"
@@ -173,7 +126,6 @@
 												class="feather-sm me-1"></span> Địa chỉ <a href="#">${bill.customerAddress}</a></li>
 										</ul>
 									</div>
-								</c:forEach>	
 							</div>
 						</div>
 
@@ -190,23 +142,29 @@
 										<th scope="col">Title</th>
 										<th scope="col">Price</th>
 										<th scope="col">Category</th>
-										<th scope="col">Avatar</th>
+										<th scope="col">Quantity</th>
+										<th scope="col">Total Price</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${billProduct.product}" var="product" varStatus="loop">
+									<c:forEach items="${orderDetail}" var="orderDetail" varStatus="loop">
 										<tr>
-											<th scope="row" width="5%">${loop.index + 1}</th>
-											<td>${product.title }</td>
+											<th scope="row" style="vertical-align: middle;">${loop.index + 1}</th>
+											<td>${orderDetail.product.title }</td>
 											<td>
 												<!-- định dạng tiền tệ -->
 												<fmt:setLocale value="vi_VN" scope="session" />
-												<fmt:formatNumber value="${product.price}" type="currency" />
+												<fmt:formatNumber value="${orderDetail.product.price}" type="currency" />
 											</td>
-											<td>${product.categories.name }</td>
-											<td><img src="${base}/upload/${product.avatar}" width="100" height="100">
+											<td>${orderDetail.product.categories.name }</td>
+											<td>${orderDetail.quality }</td>
+											<c:set var="quantity" value="${orderDetail.quality }" />
+											<c:set var="price" value="${orderDetail.product.price}" />
+											<c:set var="sum" value="${price.multiply(quantity)}"></c:set>
+											<td>
+												<fmt:setLocale value="vi_VN" scope="session" />
+												<fmt:formatNumber value="${sum}" type="currency" />
 											</td>
-
 										</tr>
 									</c:forEach>
 								</tbody>

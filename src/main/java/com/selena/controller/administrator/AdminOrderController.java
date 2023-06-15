@@ -49,7 +49,7 @@ public class AdminOrderController extends BaseController {
 	public String searchOrder(final Model model, final HttpServletRequest request, final HttpServletResponse response)
 			throws IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		List<SaleOrder> Orders = saleOrderService.searchOrder(id);
+		SaleOrder Orders = saleOrderService.searchOrder(id);
 		model.addAttribute("order", Orders);
 		return "administrator/order";
 	}

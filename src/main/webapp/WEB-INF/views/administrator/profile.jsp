@@ -111,12 +111,12 @@
 							class="nav-icon dropdown-toggle d-inline-block d-sm-none"
 							href="#" data-bs-toggle="dropdown"> <i class="align-middle"
 								data-feather="settings"></i>
-						</a> <a class="nav-link dropdown-toggle d-none d-sm-inline-block"
-							href="#" data-bs-toggle="dropdown"> <img
-								src="${base}/img/images.png"
-								class="avatar img-fluid rounded me-1" alt="" /> <span
-								class="text-dark"></span>
 						</a>
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block"
+							   href="#" data-bs-toggle="dropdown">
+								<img src="${base}/img/images.png" class="avatar img-fluid rounded me-1" alt=""/>
+								<span class="text-dark"></span>
+							</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="${base}/admin/profile"><i
 									class="align-middle me-1" data-feather="user"></i> Profile</a> <a
