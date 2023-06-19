@@ -136,7 +136,7 @@
 											<a class="btn btn-primary"
 												href="${base}/admin/bill/${order.id}" role="button">Check</a>
 											<!-- Button trigger modal -->
-											<a style="color: #FFFFFF" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+											<a style="color: #FFFFFF" data-order-id="${order.id}" type="button" class="btn btn-primary edit-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 												Edit
 											</a>
 
@@ -144,29 +144,29 @@
 											<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 												<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 													<div class="modal-content">
-														<form action="${base}/admin/order/${order.id}" method="post">
-														<div class="modal-header">
-															<h5 class="modal-title" id="staticBackdropLabel">Chỉnh sửa trạng thái</h5>
-															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-														</div>
-														<div class="modal-body">
-															<div class="btn-group">
-																<button type="button" id="dropdownMenuButton" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-																	Trạng Thái
-																</button>
-																<ul class="dropdown-menu">
-																	<li><a class="dropdown-item" >Đang giao hàng</a></li>
-																	<li><a class="dropdown-item" >Đã Thanh toán</a></li>
-																	<li><a class="dropdown-item" >Hủy</a></li>
-																	<li><hr class="dropdown-divider"></li>
-																</ul>
+														<form id="editForm" action="${base}/admin/order/${order.id}" method="post">
+															<div class="modal-header">
+																<h5 class="modal-title" id="staticBackdropLabel">Chỉnh sửa trạng thái</h5>
+																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 															</div>
-															<input style="margin-top: 10px" class="form-control" name="status" type="text" id="selected-option" readonly>
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-															<button type="submit" class="btn btn-primary">Lưu</button>
-														</div>
+															<div class="modal-body">
+																<div class="btn-group">
+																	<button type="button" id="dropdownMenuButton" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+																		Trạng Thái
+																	</button>
+																	<ul class="dropdown-menu">
+																		<li><a class="dropdown-item" >Đang giao hàng</a></li>
+																		<li><a class="dropdown-item" >Đã Thanh toán</a></li>
+																		<li><a class="dropdown-item" >Hủy</a></li>
+																		<li><hr class="dropdown-divider"></li>
+																	</ul>
+																</div>
+																<input style="margin-top: 10px" class="form-control" name="status" type="text" id="selected-option" readonly>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																<button type="submit" class="btn btn-primary">Lưu</button>
+															</div>
 														</form>
 													</div>
 												</div>
@@ -210,6 +210,17 @@
 				selectedOption.value = item.textContent;
 			});
 		});
+
+		$('#staticBackdrop').on('show.bs.modal', function (event) {
+			var button = $(event.relatedTarget); // Nút "Chỉnh sửa" được nhấp vào
+			var orderId = button.data('order-id'); // Lấy ID của hóa đơn từ thuộc tính data-order-id
+
+			var form = $(this).find('#editForm');
+			var actionUrl = '${base}/admin/order/' + orderId; // Tạo URL chứa ID hóa đơn
+			form.attr('action', actionUrl);
+		});
+
+
 	</script>
 
 
