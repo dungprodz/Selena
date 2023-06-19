@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.selena.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,6 +32,8 @@ public class AdminOrderController extends BaseController {
 	@Autowired
 	private SaleOrderService saleOrderService;
 
+	@Autowired
+	private OrderRepository orderRepository;
 
 	@RequestMapping(value = ("/admin/order"), method = RequestMethod.GET)
 	public String getOrder(final Model model, final HttpServletRequest request, final HttpServletResponse response,
@@ -45,13 +48,14 @@ public class AdminOrderController extends BaseController {
 		return "administrator/order";
 	}
 
-	@RequestMapping(value = ("/admin/order"), method = RequestMethod.POST)
-	public String searchOrder(final Model model, final HttpServletRequest request, final HttpServletResponse response)
+	@RequestMapping(value = ("/admin/order/{id}"), method = RequestMethod.POST)
+	public String searchOrder(final Model model, final HttpServletRequest request, final HttpServletResponse response,@PathVariable("id") int id)
 			throws IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		SaleOrder Orders = saleOrderService.searchOrder(id);
-		model.addAttribute("order", Orders);
-		return "administrator/order";
+		String status = request.getParameter("status");
+		SaleOrder saleOrder = orderRepository.searchOrder(id);
+		saleOrder.setStatus(status);
+		orderRepository.save(saleOrder);
+		return "redirect:/admin/order";
 	}
 	
 }
