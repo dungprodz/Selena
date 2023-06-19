@@ -71,6 +71,7 @@ public class CartController extends BaseController {
 		saleOrder.setCustomerAddress(customerAddress);
 		saleOrder.setCustomerPhone(customerPhone);
 		saleOrder.setCode(String.valueOf(System.currentTimeMillis())); // mã hóa đơn
+		saleOrder.setStatus("Đang giao hàng");
 		
 		// lấy giỏ hàng
 		HttpSession session = request.getSession();

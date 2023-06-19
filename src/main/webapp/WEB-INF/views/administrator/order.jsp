@@ -116,6 +116,7 @@
 								<th scope="col">Số hoá đơn</th>
 								<th scope="col">Địa chỉ</th>
 								<th scope="col">Ngày tạo</th>
+								<th scope="col">Trạng thái</th>
 								<th scope="col">Email</th>
 								<th scope="col">Action</th>
 							</tr>
@@ -127,13 +128,46 @@
 									<td>${order.id }</td>
 									<td>${order.customerAddress}</td>
 									<td>${order.createdDate}</td>
-
+									<td>${order.status}</td>
 									<td>${order.customerEmail}</td>
 									<td width="15%">
 
 										<div>
 											<a class="btn btn-primary"
 												href="${base}/admin/bill/${order.id}" role="button">Check</a>
+											<!-- Button trigger modal -->
+											<a style="color: #FFFFFF" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+												Edit
+											</a>
+
+											<!-- Modal -->
+											<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="staticBackdropLabel">Chỉnh sửa trạng thái</h5>
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">
+															<div class="btn-group">
+																<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+																	Trạng Thái
+																</button>
+																<ul class="dropdown-menu">
+																	<li><a class="dropdown-item" href="#">Đang giao hàng</a></li>
+																	<li><a class="dropdown-item" href="#">Đã Thanh toán</a></li>
+																	<li><a class="dropdown-item" href="#">Hủy</a></li>
+																	<li><hr class="dropdown-divider"></li>
+																</ul>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+															<button type="button" class="btn btn-primary">Lưu</button>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 
 									</td>
