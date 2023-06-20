@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.selena.model.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,8 +35,9 @@ public class ProductService extends BaseService<Product> {
 		return (Page<Product>) productRepository.findAll(pageable);
 	}
 
-
-
+	public Page<Product> findByCate(Categories categories,Pageable pageable) {
+		return productRepository.findByCategories(categories,pageable);
+	}
 	
 	@Override
 	protected Class<Product> clazz() {

@@ -7,6 +7,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.selena.controller.BaseController;
+import com.selena.service.CategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,10 +27,11 @@ import com.selena.service.ProductService;
 
 
 @Controller
-public class HomeController {
+public class HomeController extends BaseController {
 	
 	@Autowired
 	private ProductService productService;
+
 	
 	
 	@RequestMapping(value={"/home"}, method = RequestMethod.GET)

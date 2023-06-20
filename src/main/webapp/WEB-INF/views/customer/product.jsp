@@ -17,6 +17,7 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 <title>Document</title>
+	<jsp:include page="/WEB-INF/views/common/variables.jsp"></jsp:include>
 <link rel="stylesheet" media="screen"
 	href="${base}/css/customerProduct.css">
 <link rel="stylesheet"
@@ -77,18 +78,22 @@
 					</c:forEach>
 					<!--end-->
 				</div>
+
 				<nav aria-label="Page navigation example ">
 					<ul class="pagination justify-content-center">
+
 						<c:if test="${currentPages >=1}">
 							<li class="page-item "><a class="page-link"
 								href="${base}?p=${currentPages-1}">Previous</a></li>
 						</c:if>
-						<li class="page-item"><a class="page-link"
-							href="${base}?p=0">1</a></li>
-						<li class="page-item"><a class="page-link"
-							href="${base}?p=1">2</a></li>
-						<li class="page-item"><a class="page-link"
-							href="${base}?p=${currentPages+1}">Next</a></li>
+
+							<li class="page-item"><a class="page-link"
+													 href="${base}?p=0">1</a></li>
+							<li class="page-item"><a class="page-link"
+													 href="${base}?p=1">2</a></li>
+							<li class="page-item"><a class="page-link"
+													 href="${base}?p=${currentPages+1}">Next</a></li>
+
 					</ul>
 				</nav>
 			</div>

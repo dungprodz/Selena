@@ -48,15 +48,18 @@
 		<li class="dropdown"><a href="">Collection view <i
 				class="fa-solid fa-angle-down"></i></a>
 			<div class="dropdown-list">
-				<a href="${base}/product">Bộ sưu tập mùa thu</a> <a
-					href="${base}/product">Bộ sưu tập mùa đông</a>
-			</div></li>
+				<a href="${base}/product">Bộ sưu tập mùa thu</a>
+				<a href="${base}/product">Bộ sưu tập mùa đông</a>
+			</div>
+		</li>
 		<li class="dropdown"><a href="">Product view <i
 				class="fa-solid fa-angle-down"></i></a>
 			<div class="dropdown-list">
-				<a href="${base}/product">Chăm sóc da mặt</a> <a href="">dầu gội
-					/ dầu xả</a> <a href="${base}/product">Phụ kiện chăm sóc</a>
-			</div></li>
+				<c:forEach items="${categories}" var="category">
+					<a href="${base}/product/cate/${category.id}">${category.name}</a>
+				</c:forEach>
+			</div>
+		</li>
 		<li><a href="">Liên hệ</a></li>
 	</ul>
 </nav>

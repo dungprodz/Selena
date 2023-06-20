@@ -1,5 +1,6 @@
 package com.selena.controller.customer;
 
+import com.selena.controller.BaseController;
 import com.selena.model.Contact;
 import com.selena.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-public class ContactController {
+public class ContactController extends BaseController {
     @Autowired
     private ContactRepository contactRepository;
 
