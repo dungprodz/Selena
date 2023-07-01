@@ -47,7 +47,7 @@
 						Pages
 					</li>
 
-					<li class="sidebar-item active">
+					<li class="sidebar-item">
 						<a class="sidebar-link" href="${base}/admin/product/list">
 							<i class="align-middle" data-feather="sliders"></i> <span
 								class="align-middle">Dashboard</span>
@@ -66,7 +66,7 @@
 								</span>
 					</a></li>
 
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="${base}/admin/product">
 							<i class="align-middle" data-feather="inbox"></i> <span class="align-middle"> Product</span>
 						</a>
