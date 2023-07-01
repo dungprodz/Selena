@@ -103,7 +103,8 @@
 							<a href="${base}/product/${products.id}"><img
 								src="${base}/upload/${products.avatar}" alt=""></a>
 							<p>${products.title}</p>
-							<p class="price">${products.price}VND</p>
+							<fmt:setLocale value="vi_VN"/>
+							<p class="price"><fmt:formatNumber value="${products.price}" type="currency"></fmt:formatNumber> </p>
 						</div>
 					</c:forEach>
 					<!--end-->
