@@ -29,9 +29,7 @@ public class AdminCategoryController extends BaseController {
     private CategoryRepository categoryRepository;
 
     @RequestMapping(value = { "/admin/category" }, method = RequestMethod.GET)
-    public String adminCategoryAdd(final Model model,
-                                  final HttpServletRequest request,
-                                  final HttpServletResponse response) throws IOException {
+    public String adminCategoryAdd(final Model model) {
         // khởi tạo 1 product(entity) mới
         Categories newCategory = new Categories();
         model.addAttribute("category", newCategory); // đẩy data xuống view
@@ -41,10 +39,7 @@ public class AdminCategoryController extends BaseController {
     }
 
     @RequestMapping(value = { "/admin/category" }, method = RequestMethod.POST)
-    public String addCategory(final Model model,
-                                   final HttpServletRequest request,
-                                   final HttpServletResponse response,
-                              @ModelAttribute("category") Categories categories) throws IOException {
+    public String addCategory(@ModelAttribute("category") Categories categories) {
        categoryRepository.save(categories);
         return "redirect:/admin/product";
     }

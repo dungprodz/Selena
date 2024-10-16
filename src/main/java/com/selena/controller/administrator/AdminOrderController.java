@@ -36,8 +36,8 @@ public class AdminOrderController extends BaseController {
 	private OrderRepository orderRepository;
 
 	@RequestMapping(value = ("/admin/order"), method = RequestMethod.GET)
-	public String getOrder(final Model model, final HttpServletRequest request, final HttpServletResponse response,
-			@RequestParam("p") Optional<Integer> p) throws IOException {
+	public String getOrder(final Model model,
+						   @RequestParam("p") Optional<Integer> p) {
 		Sort sort = Sort.by("id").descending();
 		Pageable page = PageRequest.of(p.orElse(0), 8, sort);
 		Page<SaleOrder> Order = saleOrderService.findAll(page);
@@ -49,7 +49,7 @@ public class AdminOrderController extends BaseController {
 	}
 
 	@RequestMapping(value = ("/admin/order/{id}"), method = RequestMethod.POST)
-	public String searchOrder(final Model model, final HttpServletRequest request, final HttpServletResponse response,@PathVariable("id") int id)
+	public String searchOrder(final HttpServletRequest request, @PathVariable("id") int id)
 			throws IOException {
 		String status = request.getParameter("status");
 		SaleOrder saleOrder = orderRepository.searchOrder(id);
